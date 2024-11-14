@@ -1,39 +1,31 @@
 ﻿/*
-	SQL Server 2022 
-	- funkcja TRIM, LTRIM, RTRIM
-	
-	libera@kursysql.pl
-	https://www.kursysql.pl
-    
+    SQL Server 2022 
+    - TRIM, LTRIM, RTRIM functions
 */
-
 
 USE AdventureWorks2019
 
--- przed SQL Server 2017
+-- before SQL Server 2017
 SELECT LTRIM(RTRIM( '  test    '))
 
-
 /*
-	TRIM
+    TRIM
 */
 
 -- SQL Server 2017-2019
 -- TRIM ( [ characters FROM ] string )
 
--- usuwanie spacji
+-- removing spaces
 SELECT '  test    '
 SELECT TRIM ( '  test    ')
 SELECT TRIM ( ' ' FROM  '   test    ' )
 
--- usuwanie nie tylko spacji
+-- removing not only spaces
 SELECT TRIM ( '#' FROM  '##test###' )
 SELECT TRIM ( '#' FROM  ' # test # ' )
 
--- usuwanie spacji i #
+-- removing spaces and #
 SELECT TRIM ( ' #' FROM  ' # test # ' )
-
-
 
 -- SQL Server 2022
 -- TRIM ( [ LEADING | TRAILING | BOTH ] [characters FROM ] string )
@@ -41,7 +33,7 @@ SELECT TRIM ( LEADING ' #' FROM  ' # test # ' )
 SELECT TRIM ( TRAILING ' #' FROM  ' # test # ' )
 SELECT TRIM ( BOTH ' #' FROM  ' # test # ' )
 
--- compat level min 160
+-- minimum compatibility level 160
 ALTER DATABASE AdventureWorks2019 SET COMPATIBILITY_LEVEL = 150
 GO
 SELECT TRIM ( ' #' FROM  ' # test # ' )
@@ -50,10 +42,8 @@ GO
 ALTER DATABASE AdventureWorks2019 SET COMPATIBILITY_LEVEL = 160
 GO
 
-
-
 /*
-	LTRIM
+    LTRIM
 */
 
 -- SQL Server 2019
@@ -62,7 +52,6 @@ GO
 SELECT '  # test #  '
 UNION ALL
 SELECT LTRIM ( '  # test #  ' )
-
 
 -- SQL Server 2022
 -- LTRIM ( character_expression , [ characters ] )
@@ -73,10 +62,8 @@ SELECT LTRIM ( '  # test #  ' , '#')
 UNION ALL
 SELECT LTRIM ( '  # test #  ' , ' #')
 
-
-
 /*
-	RTRIM
+    RTRIM
 */
 
 -- SQL Server 2019
@@ -86,7 +73,6 @@ SELECT '  # test #  '
 UNION ALL
 SELECT RTRIM ( '  # test #  ' )
 
-
 -- SQL Server 2022
 -- RTRIM ( character_expression , [ characters ] )
 
@@ -95,4 +81,3 @@ UNION ALL
 SELECT RTRIM ( '  # test #  ' , '#')
 UNION ALL
 SELECT RTRIM ( '  # test #  ' , ' #')
-
